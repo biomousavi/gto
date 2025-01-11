@@ -1,5 +1,10 @@
 # gto
 
+## Features
+
+- Using Volta for node and npm versions
+- Linting for code and commit messages
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
