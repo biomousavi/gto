@@ -1,4 +1,5 @@
-export type GameState = 'intro' | 'game' | 'result' | 'end';
+export type GameState = 'start' | 'game' | 'end';
+export type GameResult = 'Correct' | 'Wrong' | null;
 
 export interface PokerStore {
   gameState: GameState;
