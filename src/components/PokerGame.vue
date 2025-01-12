@@ -88,8 +88,6 @@ onUnmounted(() => resetGame());
         <PokerCard v-for="card in cards" :card="card" :key="card" />
       </PokerCardsContainer>
 
-      {{ correctRank }}
-      {{ totalCorrect }}
       <div class="options-container">
         <button v-for="option in options" :key="option" @click="checkAnswer(option)">
           {{ option }}
