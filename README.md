@@ -2,10 +2,12 @@
 
 ## Features
 
+- CI/CD implementation.
+
+### Minor features
 - Using jsdoc for documentations
 - Using Volta for node and npm versions
 - Linting for code and commit messages
-- CI/CD implementation.
 
 This template should help get you started developing with Vue 3 in Vite.
 

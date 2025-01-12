@@ -1,6 +1,14 @@
 import PokerSolver from 'pokersolver';
 
+/**
+ * Composable for poker game functionality
+ * @returns {Object} Object containing poker-related utility functions
+ */
 export const usePoker = () => {
+  /**
+   * Generates a random set of 5 poker cards
+   * @returns {string[]} Array of 5 unique card strings in format 'rs' where r=rank and s=suit
+   */
   const generateCards = () => {
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
     const suits = ['c', 'd', 'h', 's'];
@@ -14,12 +22,21 @@ export const usePoker = () => {
     return Array.from(generated);
   };
 
-  // Function to determine correct ranking
+  /**
+   * Determines the poker hand ranking for a given set of cards
+   * @param {string[]} cards - Array of card strings in format 'rs' where r=rank and s=suit
+   * @returns {string} Name of the poker hand ranking
+   */
   const determineRanking = (cards: string[]) => {
     const hand = PokerSolver.Hand.solve(cards);
     return hand.name;
   };
 
+  /**
+   * Generates an array of 3 possible poker hand rankings, including the correct one
+   * @param {string} correctRanking - The actual ranking that should be included in options
+   * @returns {string[]} Array of 3 shuffled poker hand rankings
+   */
   const generateOptions = (correctRanking: string) => {
     const allRankings = [
       'High Card',
