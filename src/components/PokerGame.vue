@@ -29,7 +29,12 @@ function checkAnswer(selected: string) {
     pokerStore.setTimeLeft((pokerStore.timeLeft += 10));
   } else {
     setGameResult('Wrong');
-    pokerStore.setTimeLeft((pokerStore.timeLeft -= 10));
+    // Not going to negative numbers
+    if (pokerStore.timeLeft < 10) {
+      pokerStore.setTimeLeft(0);
+    } else {
+      pokerStore.setTimeLeft((pokerStore.timeLeft -= 10));
+    }
   }
 }
 
@@ -55,6 +60,7 @@ function startGame() {
 
 function resetGame() {
   clearInterval(timerInterval);
+  pokerStore.resetTimeLeft();
 }
 
 onMounted(() => startGame());
