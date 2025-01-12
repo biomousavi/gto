@@ -5,6 +5,7 @@ export interface PokerStore {
   gameState: GameState;
   timeLeft: number;
   attemptsResults: number[];
+  resetTimeLeft(): void;
   setTimeLeft(time: number): void;
   setPokerState(state: GameState): void;
   addAttemptResult(attemptCorrectAnswers: number): void;
