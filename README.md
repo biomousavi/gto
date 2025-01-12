@@ -1,10 +1,14 @@
 # gto
 
-## Features
+### Features
 
-- CI/CD implementation.
+- Dynamically Lazy Loading Components
+- CI/CD implementation
+- Unit Test
+- Using Composition Pattern
 
 ### Minor features
+
 - Using jsdoc for documentations
 - Using Volta for node and npm versions
 - Linting for code and commit messages
