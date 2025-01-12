@@ -6,8 +6,11 @@ import type { GameState } from '@/types'
 
 
 export const pokerStore = reactive({
-  gameState: 'intro' as GameState,
+  gameState: 'game' as GameState,
   timeLeft: 100,
+  setTimeLeft(time: number) {
+    this.timeLeft = time
+  },
   setPokerState(state: GameState) {
     this.gameState = state
   }

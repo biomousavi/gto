@@ -3,7 +3,7 @@ export const usePoker = () => {
   const generateCards = () => {
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
     const suits = ['c', 'd', 'h', 's'];
-    const generated = new Set();
+    const generated = new Set<string>();
     while (generated.size < 5) {
       const rank = ranks[Math.floor(Math.random() * ranks.length)];
       const suit = suits[Math.floor(Math.random() * suits.length)];
