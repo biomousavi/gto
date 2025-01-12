@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import PokerCard from './PokerCard.vue';
+import type { GameResult } from '@/types';
 import { pokerStore } from '@/store/poker';
 import { usePoker } from '@/composables/usePoker';
 import PokerCardsContainer from './PokerCardsContainer.vue';
@@ -10,58 +11,84 @@ const poker = usePoker();
 const cards = ref();
 const options = ref();
 const correctRank = ref();
+let timerInterval: number;
+const totalCorrect = ref<number>(0);
+const gameResult = ref<GameResult>(null);
 
+const increaseTotalCorrect = () => (totalCorrect.value += 1);
 const generateCards = () => (cards.value = poker.generateCards());
+const setGameResult = (result: GameResult) => (gameResult.value = result);
 const determineRanking = () => (correctRank.value = poker.determineRanking(cards.value));
 const generateOptions = () => (options.value = poker.generateOptions(correctRank.value));
 
-const checkAnswer = (selected: string) => {
+function checkAnswer(selected: string) {
+  clearInterval(timerInterval);
   if (selected === correctRank.value) {
-    pokerStore.setTimeLeft((pokerStore.timeLeft += 5));
+    increaseTotalCorrect();
+    setGameResult('Correct');
+    pokerStore.setTimeLeft((pokerStore.timeLeft += 10));
   } else {
+    setGameResult('Wrong');
     pokerStore.setTimeLeft((pokerStore.timeLeft -= 10));
   }
-};
+}
 
-// Timer function
-let timerInterval: number;
-const startTimer = () => {
+function startTimer() {
   timerInterval = setInterval(() => {
     if (pokerStore.timeLeft > 0) {
       pokerStore.setTimeLeft(pokerStore.timeLeft - 1);
     } else {
       clearInterval(timerInterval);
       pokerStore.setPokerState('end');
+      pokerStore.addAttemptResult(totalCorrect.value);
     }
   }, 1000);
-};
+}
 
-function initGame() {
+function startGame() {
+  setGameResult(null);
   startTimer();
   generateCards();
   determineRanking();
   generateOptions();
 }
 
-onMounted(() => initGame());
+function resetGame() {
+  clearInterval(timerInterval);
+}
+
+onMounted(() => startGame());
+onUnmounted(() => resetGame());
 </script>
 
 <template>
-  <div class="poker-game">
-    <!-- Timer -->
-    <p class="time-left">{{ pokerStore.timeLeft }}s ⏰</p>
+  <div>
+    <div class="game-result" v-if="gameResult">
+      <h2>{{ gameResult }}</h2>
 
-    <!-- Cards -->
-    <PokerCardsContainer>
-      <PokerCard v-for="card in cards" :card="card" :key="card" />
-    </PokerCardsContainer>
+      <h3>
+        <span>You </span>
+        <span> {{ gameResult === 'Correct' ? 'gain' : 'loose' }} </span>
+        <span> 10s</span>
+      </h3>
 
-    <!-- Options -->
-    {{ correctRank }}
-    <div class="options-container">
-      <button v-for="option in options" :key="option" @click="checkAnswer(option)">
-        {{ option }}
-      </button>
+      <button @click="startGame">Continue</button>
+    </div>
+
+    <div v-else class="poker-game">
+      <p class="time-left">{{ pokerStore.timeLeft }}s ⏰</p>
+
+      <PokerCardsContainer>
+        <PokerCard v-for="card in cards" :card="card" :key="card" />
+      </PokerCardsContainer>
+
+      {{ correctRank }}
+      {{ totalCorrect }}
+      <div class="options-container">
+        <button v-for="option in options" :key="option" @click="checkAnswer(option)">
+          {{ option }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +112,14 @@ onMounted(() => initGame());
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+.game-result {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
 </style>
