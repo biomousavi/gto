@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="cardSuitClass">
-    <div class="card-top card-suit">  {{ cardSuitSymbol }}</div>
+    <div class="card-top card-suit"> {{ cardSuitSymbol }}</div>
     <div class="card-middle">
       <span class="card-rank">{{ cardRank }}</span>
     </div>
@@ -58,16 +58,18 @@ const cardSuitClass = computed(() => `suit-${cardSuit.value}`); // Dynamic class
   position: relative;
 }
 
-.card-rank, .card-suit {
+.card-rank,
+.card-suit {
   font-size: 12px;
   font-weight: bold;
 }
 
-.card-top{
+.card-top {
   position: absolute;
   top: -4px;
   left: 2px;
 }
+
 .card-bottom {
   position: absolute;
   bottom: -4px;
