@@ -2,6 +2,7 @@
 
 ## Features
 
+- Using jsdoc for documentations
 - Using Volta for node and npm versions
 - Linting for code and commit messages
 - CI/CD implementation.
