@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import { pokerStore } from '@/store/poker';
 
-function startGame() {
-  pokerStore.setPokerState('game')
-}
 </script>
 
 <template>
-  <div>
-    <h1>Guess the cards</h1>
-    <button @click="startGame">PLAY</button>
+  <div class="poker-game">
+    <p>Time Left: {{ pokerStore.timeLeft }} seconds</p>
+
+    <button>PLAY</button>
   </div>
 
 </template>
 
 
 <style lang="css" scoped>
-div {
+.poker-game {
   display: flex;
   gap: 2rem;
   flex-direction: column;
