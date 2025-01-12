@@ -29,12 +29,4 @@ h1 {
   font-size: 2em;
   text-align: center;
 }
-
-button {
-  padding: 10px 20px;
-  background-color: #dbdbdb;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 </style>
