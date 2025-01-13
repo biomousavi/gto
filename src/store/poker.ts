@@ -1,10 +1,10 @@
 import { reactive } from 'vue';
 import type { GameState, PokerStore } from '@/types';
+import { DEFAULT_TIME_LEFT } from '@/utils/constants';
 // using simple reactive as state management
 // TODO: for more advanced usage, it's better to use Pinia
 // https://vuejs.org/guide/scaling-up/state-management.html#simple-state-management-with-reactivity-api
 
-const DEFAULT_TIME_LEFT = 100;
 export const pokerStore = reactive<PokerStore>({
   gameState: 'start',
   attemptsResults: [],

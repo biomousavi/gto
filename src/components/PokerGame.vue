@@ -5,6 +5,7 @@ import type { GameResult } from '@/types';
 import { pokerStore } from '@/store/poker';
 import { usePoker } from '@/composables/usePoker';
 import PokerCardsContainer from './PokerCardsContainer.vue';
+import { CORRECT_ANSWER_SECONDS, WRONG_ANSWER_SECONDS } from '@/utils/constants';
 
 const poker = usePoker();
 
@@ -26,14 +27,14 @@ function checkAnswer(selected: string) {
   if (selected === correctRank.value) {
     increaseTotalCorrect();
     setGameResult('Correct');
-    pokerStore.setTimeLeft((pokerStore.timeLeft += 10));
+    pokerStore.setTimeLeft((pokerStore.timeLeft += CORRECT_ANSWER_SECONDS));
   } else {
     setGameResult('Wrong');
     // Not going to negative numbers
     if (pokerStore.timeLeft < 10) {
       pokerStore.setTimeLeft(0);
     } else {
-      pokerStore.setTimeLeft((pokerStore.timeLeft -= 10));
+      pokerStore.setTimeLeft((pokerStore.timeLeft -= WRONG_ANSWER_SECONDS));
     }
   }
 }
