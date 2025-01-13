@@ -18,6 +18,12 @@
 - Gameplay description inconsistency
   - in Gameplay section we have `A correct answer adds 5 seconds to the player's time.` but in the following image for correct answer we have `You gain 10s`
 
+### TODO:
+
+- Use a UI library or Tailwindcss for more organized code.
+- Extract large components
+- Add Animation and Transition
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
