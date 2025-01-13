@@ -22,3 +22,16 @@ test('PLAY button takes user to game', async ({ page }) => {
   const gameComponent = page.locator('div.poker-game').first();
   await expect(gameComponent).toBeVisible();
 });
+
+
+test('options container has three buttons', async ({ page }) => {
+  await page.getByRole('button').click();
+  const buttons = page.locator('div.options-container button');
+  await expect(buttons).toHaveCount(3);
+});
+
+test('cards container has five cards', async ({ page }) => {
+  await page.getByRole('button').click();
+  const cards = page.locator('div.card-container div.card');
+  await expect(cards).toHaveCount(5);
+});
