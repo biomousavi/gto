@@ -13,6 +13,11 @@
 - Using Volta for node and npm versions
 - Linting for code and commit messages
 
+### Required Fixes
+
+- Gameplay description inconsistency
+  - in Gameplay section we have `A correct answer adds 5 seconds to the player's time.` but in the following image for correct answer we have `You gain 10s`
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
