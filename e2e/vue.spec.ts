@@ -16,3 +16,9 @@ test('start component PLAY button is visible', async ({ page }) => {
   const button = page.getByRole('button');
   await expect(button).toHaveText('PLAY');
 });
+
+test('PLAY button takes user to game', async ({ page }) => {
+  await page.getByRole('button').click();
+  const gameComponent = page.locator('div.poker-game').first();
+  await expect(gameComponent).toBeVisible();
+});
